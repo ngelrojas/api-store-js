@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const hbs = require('hbs');
 const app = express();
-const errorController = require('./controlles/error');
+const errorController = require('./controllers/error');
 
 app.set('view engine', 'hbs');
 app.set('views', 'views')
