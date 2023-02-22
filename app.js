@@ -13,6 +13,8 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
+const sequelize = require('./util/database');
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -21,4 +23,10 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-app.listen(3000);
+sequelize.sync()
+    .then(result => {
+        // console.log(result);
+        app.listen(3000);
+    })
+    .catch(err => console.log(err));
+
