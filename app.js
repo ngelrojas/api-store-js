@@ -47,16 +47,19 @@ Product.belongsToMany(Cart, { through: CartItem });
 sequelize
     // .sync({force: true})
     .sync()
-    .then(result => {
-        return User.findByPk(1);
-        // console.log(result);
-        app.listen(3000);
-    })
     .then(user => {
         if (!user) {
             return User.create({name: 'Max', email: 'angel@rednodes.com'});
         }
         return user;
+    })
+    .then(user => {
+        // return User.findByPk(1);
+        // console.log(result);
+        return user.createCart();
+    })
+    .then(cart => {
+        app.listen(3000);
     })
     .catch(err => console.log(err));
 
